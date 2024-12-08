@@ -32,16 +32,13 @@ public class Solution {
 
         while(queue.Count > 0){
             int level = queue.Count;
-            Node prev = null;            
 
             for(int i = 0; i < level; i++){
                 Node cur = queue.Dequeue();
 
-                if(prev != null){
-                    prev.next = cur;
+                if(i < level - 1){
+                    cur.next = queue.Peek();
                 }
-
-                prev = cur;
 
                 if(cur.left != null){
                     queue.Enqueue(cur.left);
@@ -51,8 +48,6 @@ public class Solution {
                     queue.Enqueue(cur.right);
                 }
             }
-
-            prev.next = null;
         }
         return root;
     }
